@@ -1,11 +1,13 @@
 const express = require("express");
 const connectDB = require("./db/connect");
 require("dotenv").config();
+const cors = require("cors");
 const registrationRouter = require("./routes/registrationRoute");
 
 const app = express();
 
 app.use(express.json());
+app.use(cors({}));
 
 app.get("/", (req, res) => {
   res.end("Registration Api");
@@ -13,7 +15,7 @@ app.get("/", (req, res) => {
 
 app.use("/api/v1/users", registrationRouter);
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3002;
 
 const start = async () => {
   try {
