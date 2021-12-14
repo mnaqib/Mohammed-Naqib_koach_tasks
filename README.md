@@ -32,6 +32,7 @@ Level 4 Task:
     a database. To develop the API i have used ExpressJS, NodeJS and MongoDB, similar to level 1 tasks in this task first i have defined the models for students, groups and colleges
     then designed the controllers for each model to perform CRUD operations on them. After that i have defined routes for all of them they have multiple paths siince we have to
     perform CRUD operations. After completing routes i have wired them to Express app and then created a connectDB function to connect to MongoDB database. And since it was asked 
-    to put all the data in json files into the database, i have used mongoimport --uri on each of the json files and stored them in database.
+    to put all the data in json files into the database, i have used mongoimport --uri on each of the json files and stored them in database. And since was asked to store
+    the queries inside a sql file i have created 3 .sql files for each collections that is students, groups and colleges.
     
  
