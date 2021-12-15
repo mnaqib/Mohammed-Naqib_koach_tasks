@@ -17,14 +17,12 @@ function Chat() {
   const [convId, setConvId] = useState("");
   const socket = useRef();
   const [arrivalMessage, setArrivalMessage] = useState("");
+  const [onlineUsers, setOnlineUsers] = useState([]);
 
   useEffect(() => {
     socket.current = io("ws://localhost:8900");
-  }, []);
-
-  useEffect(() => {
-    socket.current.emit("addUser", userId);
     socket.current.on("getMessage", (data) => {
+      //console.log(data.senderId);
       setArrivalMessage({
         sender: data.senderId,
         text: data.text,
@@ -32,6 +30,17 @@ function Chat() {
       });
     });
   }, []);
+
+  useEffect(() => {
+    socket.current.emit("addUser", userId);
+    socket.current.on("getUsers", (users) => {
+      setOnlineUsers(
+        users.map((user) => {
+          return user.userId;
+        })
+      );
+    });
+  }, [userId]);
 
   useEffect(() => {
     arrivalMessage && setMessages((prev) => [...prev, arrivalMessage]);
@@ -42,7 +51,6 @@ function Chat() {
       const response = await axios.get(
         `http://localhost:8800/api/v1/messages/${convId}`
       );
-      console.log(response.data);
       setMessages(response.data);
     } catch (e) {
       console.log(e);
@@ -68,15 +76,24 @@ function Chat() {
     }
   }, [convId]);
 
+  const checkUser = () => {
+    return onlineUsers.includes(rec.state.id);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    socket.current.emit("sendMessage", {
-      senderId: userId,
-      receiverId: rec.state.id,
-      text: message,
-    });
+    console.log(checkUser(), "checkuser");
+    if (checkUser()) {
+      console.log("sent");
+      socket.current.emit("sendMessage", {
+        senderId: userId,
+        receiverId: rec.state.id,
+        text: message,
+      });
+    }
+
     try {
-      const responde = await axios.post(
+      const response = await axios.post(
         "http://localhost:8800/api/v1/messages",
         {
           conversationId: convId,
