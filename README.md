@@ -35,4 +35,18 @@ Level 4 Task:
     to put all the data in json files into the database, i have used mongoimport --uri on each of the json files and stored them in database. And since was asked to store
     the queries inside a sql file i have created 3 .sql files for each collections that is students, groups and colleges.
     
+Level 5 Task:
+    This level task was bit tricky for me since i did not have much idea about sockets. For the chat app first i developed the backend api using ExpressJS, NodeJs and mongoDB         this api had all the operations that would be needed for a chat app such as login/logout functionality, registration to the chat app and finally storing the conversations       between two users to the database.After testing the operations of the API using postman and confirming everything is working then i started designing and developing the chat
+    app frontend, I have used ReactJS to develop the front end and also i have used redux to store the information about the logged in user in redux store. Also i have used         react router for routing the front end to different routes and i haved used a bit of css to style tha pages and mostly everything is done using react-styled-components.
+    Once the front end was finished then i started wiring the front end to my backend api, to perform api calls in frontend i have used axios package.
+    so basic working of chatting app is such, all the users registered on to the app can message anyone on the app when user logs in it will directly take them to home page         which is basically a list of people on the app, so the user can click on any of the listed users and have a conversation with them. Whenever a user clicks on anyone of the
+    listed users a chat id will be created for their conversation and this will remain same for the both user so any messages they exchange between them will have a chat id
+    associated with it along with sender id. For registering to the app a user needs to provide a unique username,email and mobile.
+    So after wiring up the front end and backend and testiing all the features and making sure everything is working then i started learning about sockets and how using sockets
+    we can send and receive instant messages.
+    So in this chatapp i have used socket.io package which is used for socket related oprations, thus using the socket.io i have developed a socket server this server listens
+    for users to connect, When a user clicks on any of the user to have a conversation, the user gets connected to the socket server and registers himself with his userid and             socketid and the socket server stores this information in a array since socket id will keep on changing whenever user disconencts and connects again so using users id which
+    is unique for each user and will remain same, the socket server updates its array with new socket id.
+    when a user wants to communicate with another user he sends a sendmessage request to the server, the request will have senderid, receiverid and message text , server takes this and then forwards it to the intended user, server does
+    this by using its array of connected users.
  
