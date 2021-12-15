@@ -1,0 +1,18 @@
+body {
+  background-image: linear-gradient(to right, #12c2e9, #c471ed, #f64f59);
+  font-family: "Roboto";
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background-image: linear-gradient(to bottom, #12c2e9, #c471ed, #f64f59);
+}
